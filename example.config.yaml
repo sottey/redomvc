@@ -1,0 +1,5 @@
+username: [YOUR NAME DOT COM TOKEN USERNAME]
+token: [YOUR NAME DOT COM TOKEN]
+workers: 5
+delay: 300
+api: https://api.name.com/v4/domains:checkAvailability
