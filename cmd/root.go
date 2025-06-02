@@ -20,7 +20,7 @@ var rootCmd = &cobra.Command{
 		} else if len(args) == 1 {
 			pkg.CheckSingleDomain(args[0])
 		} else {
-			fmt.Println("❌ You must provide a domain or use the -f flag.")
+			fmt.Println("You must provide a domain or use the -f flag.")
 		}
 	},
 }

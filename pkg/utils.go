@@ -25,7 +25,7 @@ func CheckSingleDomain(domain string) {
 func CheckFromFile(file string) {
 	f, err := os.Open(file)
 	if err != nil {
-		fmt.Printf("❌ Error opening file: %v\n", err)
+		fmt.Printf("Error opening file: %v\n", err)
 		return
 	}
 	defer f.Close()
@@ -73,7 +73,7 @@ func checkDomain(domain string) {
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		fmt.Printf("❌ Error for %s: %v\n", domain, err)
+		fmt.Printf("Error for %s: %v\n", domain, err)
 		return
 	}
 	defer resp.Body.Close()
@@ -84,21 +84,21 @@ func checkDomain(domain string) {
 	}
 
 	if resp.StatusCode != 200 {
-		fmt.Printf("❌ HTTP %d for %s\nBody: %s\n", resp.StatusCode, domain, string(data))
+		fmt.Printf("HTTP %d for %s\nBody: %s\n", resp.StatusCode, domain, string(data))
 		return
 	}
 
 	var result CheckAvailabilityResponse
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Printf("❌ JSON error for %s: %v\nRaw: %s\n", domain, err, string(data))
+		fmt.Printf("JSON error for %s: %v\nRaw: %s\n", domain, err, string(data))
 		return
 	}
 
 	if len(result.Results) > 0 && result.Results[0].Purchasable {
 		price := result.Results[0].PurchasePrice
 		renewalPrice := result.Results[0].RenewalPrice
-		fmt.Printf("✅ %s is available for $%.2f (Renewal: $%.2f)\n", result.Results[0].DomainName, price, renewalPrice)
+		fmt.Printf("%s is available for $%.2f (Renewal: $%.2f)\n", result.Results[0].DomainName, price, renewalPrice)
 	} else {
-		fmt.Printf("❌ %s is NOT available.\n", domain)
+		fmt.Printf("%s is NOT available.\n", domain)
 	}
 }
